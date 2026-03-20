@@ -52,7 +52,7 @@ export default function Header() {
             placeholder="Your phone number -- get a gree quote"
             className="h-10 w-full rounded-sm rounded-r-none border-black px-4 text-black placeholder:text-[12px] placeholder:text-black/50"
           ></input>
-          <Button className="rounded-none border border-primary-orange font-semibold">
+          <Button className="rounded-none border border-primary-blue-100 font-semibold">
             Get Free Quote
           </Button>
         </div>
@@ -70,7 +70,7 @@ export default function Header() {
       <div className="z-50 flex w-full items-center justify-center divide-x divide-red-500 bg-black py-1">
         <div className="flex items-center gap-2 px-4">
           <div className="flex">
-            <div className="rounded-[4px] bg-primary-orange px-2">
+            <div className="rounded-[4px] bg-primary-blue-100 px-2">
               <p className="text-[12px]">Free</p>
             </div>
           </div>

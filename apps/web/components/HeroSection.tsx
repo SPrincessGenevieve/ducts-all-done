@@ -18,13 +18,13 @@ export default function HeroSection() {
       <div className="flex h-full w-full justify-between">
         <div className="z-50 mt-20 flex flex-col gap-8 p-4 lg:pl-[100px]">
           <div className="flex">
-            <div className="flex items-center justify-center gap-2 rounded-full border border-primary-orange px-2">
-              <div className="h-2 w-2 rounded-full bg-primary-orange"></div>
+            <div className="flex items-center justify-center gap-2 rounded-full border border-primary-blue-100 px-2">
+              <div className="h-2 w-2 rounded-full bg-primary-blue-100"></div>
               <p className="text-sm text-black">Tampa's Trusted Choice</p>
             </div>
           </div>
           <div>
-            <p className="text-5xl font-bold text-primary-orange">
+            <p className="text-5xl font-bold text-primary-blue-100">
               Cleaner Air
             </p>
             <p className="text-5xl font-bold text-black">
