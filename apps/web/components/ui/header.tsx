@@ -7,7 +7,7 @@ import React from "react"
 export default function Header() {
   return (
     <div className="z-50 w-full">
-      <div className="flex h-8 w-full items-center justify-center divide-x divide-amber-500/70 bg-black px-2">
+      <div className="flex h-8 w-full items-center justify-center divide-x divide-amber-500/70 bg-[#03191e] px-2">
         <div className="flex h-[50%] items-center gap-2 px-4">
           <div className="h-2 w-2 rounded-full bg-green-400"></div>
           <div className="flex items-center">
@@ -37,7 +37,7 @@ export default function Header() {
           <p className="text-[10px]">IICRC & EPA Certified</p>
         </div>
       </div>
-      <div className="flex w-full items-center justify-between gap-4 px-4">
+      <div className="flex w-full items-center justify-between gap-4 bg-[#001317] px-4">
         <Image
           src={
             "https://res.cloudinary.com/dqgkvrmve/image/upload/v1774001571/logo_oxklht.webp"
@@ -47,17 +47,17 @@ export default function Header() {
           height={400}
           className="h-20 w-auto"
         ></Image>
-        <div className="flex w-100 items-center overflow-hidden rounded-sm border border-black">
+        <div className="flex w-100 items-center overflow-hidden rounded-sm border border-blue-400">
           <input
             placeholder="Your phone number -- get a gree quote"
-            className="h-10 w-full rounded-sm rounded-r-none border-black px-4 text-black placeholder:text-[12px] placeholder:text-black/50"
+            className="h-10 w-full rounded-sm rounded-r-none px-4 text-black placeholder:text-[12px] placeholder:text-blue-300/50"
           ></input>
           <Button className="rounded-none border border-primary-blue-100 font-semibold">
             Get Free Quote
           </Button>
         </div>
         <div className="flex gap-2">
-          <Button variant={"outline"} className="text-black">
+          <Button variant={"outline"} className="text-white">
             <MessageCircleIcon></MessageCircleIcon>
             Text me back
           </Button>
@@ -67,7 +67,7 @@ export default function Header() {
           </Button>
         </div>
       </div>
-      <div className="z-50 flex w-full items-center justify-center divide-x divide-red-500 bg-black py-1">
+      <div className="z-50 flex w-full items-center justify-center divide-x divide-red-500 bg-[#002d36] py-1">
         <div className="flex items-center gap-2 px-4">
           <div className="flex">
             <div className="rounded-[4px] bg-primary-blue-100 px-2">

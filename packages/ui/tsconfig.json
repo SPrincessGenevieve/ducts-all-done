@@ -6,6 +6,6 @@
       "@workspace/ui/*": ["./src/*"]
     }
   },
-  "include": ["."],
+  "include": [".", "../../apps/web/lib/data.ts"],
   "exclude": ["node_modules", "dist"]
 }

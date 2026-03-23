@@ -28,6 +28,7 @@
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
   --color-primary-blue-100: var(--primary-blue-100);
+  --color-primary-blue-200: var(--primary-blue-200);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
@@ -52,7 +53,8 @@
 }
 
 :root {
-  --primary-blue-100: oklch(69.052% 0.12965 225.623);
+  --primary-blue-100: oklch(72.007% 0.13225 178.305);
+  --primary-blue-200: oklch(53.681% 0.09859 178.314);
   --background: oklch(88.618% 0.00675 116.08);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -88,7 +90,8 @@
 }
 
 .dark {
-  --primary-blue-100: oklch(69.052% 0.12965 225.623);
+  --primary-blue-100: oklch(72.007% 0.13225 178.305);
+  --primary-blue-200: oklch(53.681% 0.09859 178.314);
   --background: oklch(88.618% 0.00675 116.08);
   --foreground: oklch(0.985 0 0);
   --card: oklch(0.205 0 0);
