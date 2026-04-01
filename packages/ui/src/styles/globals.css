@@ -8,6 +8,7 @@
 @source "../**/*.{ts,tsx}";
 
 @theme inline {
+  --my-shadow: var(--my-shadow);
   --font-heading: var(--font-sans);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -27,8 +28,11 @@
   --color-border: var(--border);
   --color-destructive: var(--destructive);
   --color-accent-foreground: var(--accent-foreground);
+  --color-primary-blue-50: var(--primary-blue-50);
+  --color-primary-blue-150: var(--primary-blue-150);
   --color-primary-blue-100: var(--primary-blue-100);
   --color-primary-blue-200: var(--primary-blue-200);
+  --color-primary-blue-300: var(--primary-blue-300);
   --color-accent: var(--accent);
   --color-muted-foreground: var(--muted-foreground);
   --color-muted: var(--muted);
@@ -53,8 +57,12 @@
 }
 
 :root {
+  --my-shadow: 0 0 10px #0ff, 0 0 20px #0ff;
+  --primary-blue-50: oklch(90.475% 0.02799 185.734);
+  --primary-blue-150: oklch(84.143% 0.04626 217.6);
   --primary-blue-100: oklch(72.007% 0.13225 178.305);
   --primary-blue-200: oklch(53.681% 0.09859 178.314);
+  --primary-blue-300: oklch(42.537% 0.07722 179.948);
   --background: oklch(88.618% 0.00675 116.08);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -88,8 +96,15 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 }
-
-.dark {
+.he {
+  --primary-blue-200: #00806f;
+  --primary-blue-100: #00bfa6;
+  --primary-blue-50: rgb(204, 230, 226);
+  color: rgb(170, 211, 223);
+}
+/* .dark {
+  --primary-blue-50: oklch(90.475% 0.02799 185.734);
+  --primary-blue-150: oklch(84.143% 0.04626 217.6);
   --primary-blue-100: oklch(72.007% 0.13225 178.305);
   --primary-blue-200: oklch(53.681% 0.09859 178.314);
   --background: oklch(88.618% 0.00675 116.08);
@@ -123,7 +138,7 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
-}
+} */
 
 @layer base {
   * {
@@ -132,4 +147,135 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.hero-footer {
+}
+
+.gradient-background {
+  background: linear-gradient(62deg, #6cd8ff, #4eab95, #23a6d5, #23d5ab);
+  animation: gradient 15s ease infinite;
+  background-size: 400% 400%;
+}
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+@keyframes gradient {
+  0% {
+    background-position: 0 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@media (max-width: 1160px) {
+  .abstract-map-cont {
+    position: absolute;
+    bottom: 0;
+  }
+}
+
+@media (max-width: 1045px) {
+  .process-card-cont {
+    flex-wrap: wrap;
+  }
+  .process-card {
+    width: 100%;
+    max-width: 65vh;
+  }
+}
+
+@media (max-width: 915px) {
+  .testimony-cont {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-height: 670px) {
+  .screen-duct {
+    height: 30vh;
+  }
+  .header-section-main {
+    height: 88%;
+  }
+}
+
+@media (max-width: 660px) {
+  .choose-cont {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 450px) {
+  .choose-cont {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}
+
+@media (min-height: 740px) {
+  .screen-duct {
+    height: 40vh;
+  }
+}
+
+@media (max-height: 845px) {
+  .screen-duct {
+    height: 30vh;
+  }
+}
+
+@media (max-width: 510px) {
+  .service-icon-cont {
+    scale: 0.75;
+  }
+}
+
+.starfield-wrapper {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+}
+
+@keyframes rotate {
+  0% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg) rotateY(0);
+  }
+  100% {
+    transform: perspective(400px) rotateZ(20deg) rotateX(-40deg)
+      rotateY(-360deg);
+  }
+}
+
+.stars {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform-style: preserve-3d;
+  transform: perspective(500px);
+  perspective-origin: 50% 100%;
+  animation: rotate 90s linear infinite;
+}
+
+.star {
+  width: 2px;
+  height: 2px;
+  background: white;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0 -300px;
+  transform: translate3d(0, 0, -300px);
+  backface-visibility: hidden;
 }
