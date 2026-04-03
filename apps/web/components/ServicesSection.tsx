@@ -13,7 +13,7 @@ export default function ServicesSection() {
   const [position, setPosition] = useState(0)
   const [totalScroll, setTotalScroll] = useState(0)
 
-  const step = (totalScroll / 8) * 1.1
+  const step = (totalScroll / 16) * 1.1
   const checkpoint = Array.from(
     { length: services.length },
     (_, i) => step * (i + 1)
@@ -53,7 +53,7 @@ export default function ServicesSection() {
 
   return (
     <div id="example">
-      {/* <motion.header
+      <motion.header
         className="fixed top-0 z-90 flex w-full flex-col items-center justify-center gap-4 p-4 backdrop-blur-xl backdrop-sepia-50"
         animate={{
           y: hidden ? -140 : 0,
@@ -94,7 +94,7 @@ export default function ServicesSection() {
             )
           })}
         </div>
-      </motion.header> */}
+      </motion.header>
 
       <main className="">
         {services_detail_data.map((item, i) => (
