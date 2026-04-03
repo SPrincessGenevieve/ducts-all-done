@@ -76,6 +76,7 @@ export default function QuestionSection({
             type={multiple ? "multiple" : "single"}
           >
             <AccordionItem
+              key={i}
               className="w-full text-primary-blue-200"
               value={item.answer}
             >

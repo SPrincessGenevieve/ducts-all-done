@@ -80,7 +80,7 @@ export default function MessageSection() {
         <div className="flex w-full flex-col gap-4">
           <div className="grid w-full grid-cols-2 gap-4">
             {fields.map((item, i) => (
-              <div className="flex w-full flex-col">
+              <div key={i} className="flex w-full flex-col">
                 <p className="text-primary-blue-200">{item.field}</p>
                 <input
                   className="h-10 rounded-sm border border-primary-blue-200/50 p-2 text-primary-blue-100 transition duration-200 ease-in-out outline-none placeholder:text-primary-blue-200/50 focus:border-primary-blue-200"
@@ -103,6 +103,7 @@ export default function MessageSection() {
             <DropdownMenuContent className="bg-white">
               {selection.map((item, i) => (
                 <DropdownMenuItem
+                  key={i}
                   onClick={() => setService(item)}
                   className="text-black hover:bg-gray-50"
                 >
