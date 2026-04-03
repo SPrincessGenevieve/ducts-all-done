@@ -28,9 +28,9 @@ export default function RootLayout({
       )}
     >
       <body>
-        <ThemeProvider>
-          <div className="h-screen w-full bg-white">{children}</div>
-        </ThemeProvider>
+        {/* <ThemeProvider> */}
+        <div className="h-screen w-full bg-white">{children}</div>
+        {/* </ThemeProvider> */}
       </body>
     </html>
   )

@@ -1,10 +1,9 @@
 "use client"
 
-import React from "react"
-import FloridaMap from "./ui/FloridaMap"
-import AbstractContainer from "./ui/AbstractContainer"
+import React, { useState, useEffect } from "react"
 import { motion } from "framer-motion"
 import SectionTitle from "./ui/SectionTitle"
+import AbstractContainer from "./ui/AbstractContainer"
 
 const placeList = [
   "Tampa",
@@ -37,20 +36,35 @@ const placeList = [
 ]
 
 export default function ServiceAreaSection() {
-  const shuffle = (array: string[]) => {
-    return [...array].sort(() => Math.random() - 0.5)
+  // 1. Initialize rows as an empty array
+  const [rows, setRows] = useState<string[][]>([])
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    // 2. This logic ONLY runs on the client
+    const shuffle = (array: string[]) =>
+      [...array].sort(() => 0.5 - Math.random())
+
+    const generatedRows = [...Array(8)].map(() => shuffle(placeList))
+
+    setRows(generatedRows)
+    setMounted(true)
+  }, [])
+
+  // 3. Server renders null, Client renders null on first pass.
+  // No mismatch possible.
+  if (!mounted || rows.length === 0) {
+    return <div className="min-h-screen w-full bg-white" />
   }
 
   return (
     <div className="relative flex min-h-screen w-full flex-col items-center justify-center gap-4 overflow-hidden bg-linear-0 from-primary-blue-100 from-10% to-white to-70%">
       <div className="z-20 max-w-180 p-4">
         <SectionTitle
-          title={"Service Area"}
-          label={"Serving 4 Counties Across Tampa Bay"}
-          desc={
-            "If you're in the Greater Tampa Bay area, we've got you covered."
-          }
-        ></SectionTitle>
+          title="Service Area"
+          label="Serving 4 Counties Across Tampa Bay"
+          desc="If you're in the Greater Tampa Bay area, we've got you covered."
+        />
       </div>
 
       <div className="flex h-full flex-wrap-reverse items-center justify-center gap-20">
@@ -63,19 +77,15 @@ export default function ServiceAreaSection() {
           }}
           className="flex h-full min-h-150 w-full max-w-200 flex-col items-center justify-center gap-4 overflow-hidden p-4"
         >
-          {[...Array(8)].map((_, rowIndex) => {
+          {rows.map((randomizedList, rowIndex) => {
             const isLeft = rowIndex % 2 === 0
-
-            // shuffle once per row
-            const randomizedList = shuffle(placeList)
+            const displayList = [...randomizedList, ...randomizedList]
 
             return (
               <motion.div
-                key={rowIndex}
+                key={`row-${rowIndex}`}
                 className="flex w-max gap-4"
-                animate={{
-                  x: isLeft ? ["0%", "-50%"] : ["-50%", "0%"],
-                }}
+                animate={{ x: isLeft ? ["0%", "-50%"] : ["-50%", "0%"] }}
                 transition={{
                   repeat: Infinity,
                   repeatType: "loop",
@@ -83,14 +93,14 @@ export default function ServiceAreaSection() {
                   ease: "linear",
                 }}
               >
-                {[...randomizedList, ...randomizedList].map((item, i) => (
+                {displayList.map((item, i) => (
                   <div
-                    key={i}
+                    key={`item-${rowIndex}-${i}-${item}`}
                     className="flex h-10 w-40 shrink-0 items-center justify-center rounded-sm bg-white/50 backdrop-blur-2xl"
                   >
-                    <p className="text-center text-sm text-primary-blue-200">
+                    <span className="text-center text-sm text-primary-blue-200">
                       {item}
-                    </p>
+                    </span>
                   </div>
                 ))}
               </motion.div>
@@ -99,7 +109,7 @@ export default function ServiceAreaSection() {
         </div>
 
         <div className="abstract-map-cont my-12 flex">
-          <AbstractContainer></AbstractContainer>
+          <AbstractContainer />
         </div>
       </div>
     </div>

@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { useMemo } from "react"
+import { Fragment, useEffect, useMemo, useState } from "react"
 import SectionTitle from "./ui/SectionTitle"
 
 type WindLineProps = {
@@ -30,6 +30,18 @@ const WindCloud = ({
   // Randomize starting position
   const startX = -50 - Math.random() * 100 // start somewhere offscreen left
   const startY = Math.random() * 80 // random vertical position 0% - 80%
+
+  const [config, setConfig] = useState<{ x: number; y: number } | null>(null)
+
+  useEffect(() => {
+    // ✅ FIX: This only runs in the browser, so Math.random() is safe here.
+    setConfig({
+      x: -50 - Math.random() * 100,
+      y: Math.random() * 80,
+    })
+  }, [])
+
+  if (!config) return null // Wait for the client to generate positions
 
   return (
     <motion.div
@@ -69,6 +81,12 @@ const WindLine = ({ delay, duration, top }: WindLineProps) => {
 }
 
 export default function ProcessSection() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   const windLines = useMemo(() => {
     return Array.from({ length: 20 }).map(() => ({
       top: `${Math.random() * 100}%`,
@@ -102,9 +120,8 @@ export default function ProcessSection() {
       <div className="absolute top-0 z-0 h-full w-full">
         <div className="relative min-h-screen w-full overflow-hidden bg-transparent blur-[3px]">
           <div className="pointer-events-none absolute inset-0">
-            {windLines.map((line, i) => (
-              <WindLine key={i} {...line} />
-            ))}
+            {mounted &&
+              windLines.map((line, i) => <WindLine key={i} {...line} />)}
           </div>
           <WindCloud
             src="https://res.cloudinary.com/dqgkvrmve/image/upload/v1774789721/cloud2_nup8lp.png"
@@ -156,32 +173,33 @@ export default function ProcessSection() {
         ></SectionTitle>
         <div className="process-card-cont z-20 mt-4 flex min-h-100 w-full max-w-250 justify-evenly gap-8">
           {items.map((item, i) => (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{
-                ease: "easeInOut",
-                delay: i / 4,
-                type: "spring",
-                stiffness: 120,
-                damping: 10,
-                mass: 0.8,
-              }}
-              key={i}
-              className="process-card flex w-full flex-col items-center justify-center gap-2 rounded-2xl bg-primary-blue-200/10 p-4 backdrop-blur-2xl"
-            >
-              <Image
-                className="rounded-full"
-                src={item.icon}
-                alt=""
-                width={60}
-                height={60}
-              ></Image>
-              <motion.p className="text-center text-xl font-semibold text-primary-blue-100">
-                {item.label}
-              </motion.p>
-              <p className="text-center text-sm text-black">{item.desc}</p>
-            </motion.div>
+            <Fragment key={i}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  ease: "easeInOut",
+                  delay: i / 4,
+                  type: "spring",
+                  stiffness: 120,
+                  damping: 10,
+                  mass: 0.8,
+                }}
+                className="process-card flex w-full flex-col items-center justify-center gap-2 rounded-2xl bg-primary-blue-200/10 p-4 backdrop-blur-2xl"
+              >
+                <Image
+                  className="rounded-full"
+                  src={item.icon}
+                  alt=""
+                  width={60}
+                  height={60}
+                ></Image>
+                <motion.p className="text-center text-xl font-semibold text-primary-blue-100">
+                  {item.label}
+                </motion.p>
+                <p className="text-center text-sm text-black">{item.desc}</p>
+              </motion.div>
+            </Fragment>
           ))}
         </div>
       </div>

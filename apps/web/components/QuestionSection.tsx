@@ -72,11 +72,11 @@ export default function QuestionSection({
       <div className="flex w-full max-w-200 flex-col gap-4 p-8">
         {faq.map((item, i) => (
           <Accordion
+            key={i}
             collapsible={collapsible}
             type={multiple ? "multiple" : "single"}
           >
             <AccordionItem
-              key={i}
               className="w-full text-primary-blue-200"
               value={item.answer}
             >

@@ -1,18 +1,8 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
-import L from "leaflet"
 import "leaflet/dist/leaflet.css"
-
-// Fix default icon paths
-delete (L.Icon.Default.prototype as any)._getIconUrl
-L.Icon.Default.mergeOptions({
-  iconRetinaUrl:
-    "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
-  iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
-  shadowUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
-})
 
 // Florida locations
 const locations = [
@@ -45,19 +35,39 @@ const locations = [
   { name: "Bradenton Beach", lat: 27.5042, lng: -82.7399 },
 ]
 
-// Component to auto-fit all markers
 function FitBounds({ markers }: { markers: typeof locations }) {
   const map = useMap()
 
   useEffect(() => {
-    const bounds = L.latLngBounds(markers.map((m) => [m.lat, m.lng]))
-    map.fitBounds(bounds, { padding: [50, 50] }) // Add some padding
+    import("leaflet").then((L) => {
+      const bounds = L.latLngBounds(markers.map((m) => [m.lat, m.lng]))
+      map.fitBounds(bounds, { padding: [50, 50] })
+    })
   }, [map, markers])
 
   return null
 }
 
 export default function FloridaMap() {
+  const [leafletLoaded, setLeafletLoaded] = useState(false)
+
+  useEffect(() => {
+    import("leaflet").then((L) => {
+      // Fix default icon paths
+      delete (L.Icon.Default.prototype as any)._getIconUrl
+      L.Icon.Default.mergeOptions({
+        iconRetinaUrl:
+          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png",
+        iconUrl: "https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png",
+        shadowUrl:
+          "https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png",
+      })
+      setLeafletLoaded(true)
+    })
+  }, [])
+
+  if (!leafletLoaded) return <div>Loading map...</div>
+
   return (
     <MapContainer
       //@ts-ignore

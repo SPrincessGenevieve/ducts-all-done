@@ -92,7 +92,7 @@ export default function ServiceDetailSection({ item }: ItemT) {
           {items.map((item, i) => (
             <div
               key={i}
-              className="flex min-w-[200px] items-center gap-4 p-2 select-none"
+              className="flex min-w-50 items-center gap-4 p-2 select-none"
             >
               <item.icon className="text-white" />
               <div>

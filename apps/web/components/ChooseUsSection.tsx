@@ -63,27 +63,28 @@ export default function ChooseUsSection() {
       </div>
       <motion.div className="choose-cont z-20 grid grid-cols-3 gap-4 p-4">
         {data.map((item, i) => (
-          <motion.div
-            initial={{ opacity: 0, y: 40, scale: 0.9 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{
-              type: "spring",
-              stiffness: 120,
-              damping: 10,
-              mass: 0.8,
-              delay: i * 0.15,
-            }}
-            key={i}
-            className="flex w-full max-w-80 flex-col gap-4 rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-3xl"
-          >
-            <motion.div className="flex gap-2">
-              <item.icon className="text-primary-blue-100"></item.icon>
-              <motion.p className="font-semibold text-primary-blue-100">
-                {item.label}
-              </motion.p>
+          <React.Fragment key={i}>
+            <motion.div
+              initial={{ opacity: 0, y: 40, scale: 0.9 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{
+                type: "spring",
+                stiffness: 120,
+                damping: 10,
+                mass: 0.8,
+                delay: i * 0.15,
+              }}
+              className="flex w-full max-w-80 flex-col gap-4 rounded-2xl bg-white/20 p-4 shadow-xl backdrop-blur-3xl"
+            >
+              <motion.div className="flex gap-2">
+                <item.icon className="text-primary-blue-100"></item.icon>
+                <motion.p className="font-semibold text-primary-blue-100">
+                  {item.label}
+                </motion.p>
+              </motion.div>
+              <p className="text-sm text-primary-blue-200">{item.desc}</p>
             </motion.div>
-            <p className="text-sm text-primary-blue-200">{item.desc}</p>
-          </motion.div>
+          </React.Fragment>
         ))}
       </motion.div>
     </div>

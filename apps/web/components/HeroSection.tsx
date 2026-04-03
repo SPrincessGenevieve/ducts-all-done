@@ -159,14 +159,16 @@ export default function HeroSection() {
                 {icons.map(
                   (item, i) =>
                     slide === i && (
-                      <motion.div
-                        key={i}
-                        className="flex w-55 items-center gap-2 rounded-[5px] bg-primary-blue-100 p-2"
-                      >
-                        <p className="text-sm font-semibold text-white">
-                          {item.label}
-                        </p>
-                      </motion.div>
+                      <React.Fragment key={i}>
+                        <motion.div
+                          key={i}
+                          className="flex w-55 items-center gap-2 rounded-[5px] bg-primary-blue-100 p-2"
+                        >
+                          <p className="text-sm font-semibold text-white">
+                            {item.label}
+                          </p>
+                        </motion.div>
+                      </React.Fragment>
                     )
                 )}
 
